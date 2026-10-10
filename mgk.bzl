@@ -107,6 +107,7 @@ def define_mgk(
         platform_device_user_modules,
         symbol_list,
         dtb_files = None,
+        dtbo_srcs = None,
         dtbo_config = None):
     mgk_defconfig_overlays = []
     for o in DEFCONFIG_OVERLAYS.split(" "):
@@ -268,8 +269,7 @@ def define_mgk(
             kernel_images(
                 name = "{}_kernel_images.{}".format(name, build),
                 kernel_build = ":{}.{}".format(name, build),
-                build_dtbo = True,
-                dtbo_srcs = ["//kernel_device_modules-6.6/arch/arm64/boot/dts:mtk_dtbo"],
+                dtbo_srcs = dtbo_srcs,
                 dtbo_config = dtbo_config,
                 kernel_modules_install = ":kernel_modules_install",
             )
